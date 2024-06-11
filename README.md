@@ -17,7 +17,7 @@ Agrega la dependencia a tu archivo `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  dart_fake_store_api_wrapper: ^0.0.2
+  dart_fake_store_api_wrapper: ^0.0.3
 ```
 
 Luego, ejecuta:
@@ -30,42 +30,121 @@ A continuación, se muestra un ejemplo de cómo usar el paquete para obtener pro
 
 ```
 import 'package:dart_fake_store_api_wrapper/dart_fake_store_api_wrapper.dart';
+import 'package:flutter/material.dart';
 
-void main() async {
-  final apiWrapper = DartFakeStoreApiWrapper();
+void main() {
+  runApp(const MyApp());
+}
 
-  // Obtener todos los productos
-  try {
-    final productos = await apiWrapper.runFetchProducts();
-    print('Productos obtenidos: ${productos.length}');
-  } catch (e) {
-    print(e);
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  // Obtener un solo producto por ID
-  try {
-    final producto = await apiWrapper.runFetchSingleProduct(1);
-    print('Producto obtenido: ${producto.title}');
-  } catch (e) {
-    print(e);
-  }
-
-  // Enviar un producto al carrito
-  try {
-    final cart = CartEntity(
-      id: 1,
-      userId: 1,
-      date: DateTime.now().toString(),
-      products: [CartProduct(productId: 1, quantity: 2)],
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
-    final carrito = await apiWrapper.runSendProductToCart(cart);
-    print('Producto enviado al carrito: ${carrito.id}');
-  } catch (e) {
-    print(e);
   }
 }
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final _apiWrapper = DartFakeStoreApiWrapper();
+  String productsObtained = '';
+  String singleProductObtained = '';
+  String productAddedToCart = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    try {
+      // Obtener todos los productos
+      final productos = await _apiWrapper.runFetchProducts();
+      setState(() {
+        productsObtained = 'Productos obtenidos: ${productos.length}';
+      });
+
+      // Obtener un producto por ID
+      final producto = await _apiWrapper.runFetchSingleProduct(1);
+      setState(() {
+        singleProductObtained = 'Producto obtenido: ${producto.title}';
+      });
+
+      // Enviar un producto al carrito
+      final cart = CartEntity(
+        userId: 1,
+        date: DateTime.now(),
+        products: [
+          ProductQuantityEntity(
+            productId: 1,
+            quantity: 2,
+          ),
+        ],
+      );
+      final carrito = await _apiWrapper.runSendProductToCart(cart);
+      setState(() {
+        for (var cart in carrito.products) {
+          productAddedToCart =
+              'Cantidad de productos enviados al carrito: ${cart.quantity}';
+        }
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              productsObtained,
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              singleProductObtained,
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              productAddedToCart,
+              style: const TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
 ```
-- En la carpeta `example` se incluye un ejemplo más completo de cómo utilizar este paquete.
 # API
 ## DartFakeStoreApiWrapper
 ### runFetchProducts

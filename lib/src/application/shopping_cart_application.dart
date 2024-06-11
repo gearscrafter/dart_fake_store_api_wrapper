@@ -21,28 +21,22 @@ import 'package:dartz/dartz.dart';
 import '../core/errors/failures.dart';
 import '../domain/entities/cart_entity.dart';
 import '../domain/entities/product_entity.dart';
-import '../domain/use_cases/get_products.dart';
-import '../domain/use_cases/get_single_product.dart';
-import '../domain/use_cases/send_product_to_cart.dart';
+import '../domain/use_cases/products.dart';
 
 class ShoppingCartApplication {
-  final SendProductToCart sendProduct;
-  final GetProducts getProducts;
-  final GetSingleProduct getSingleProduct;
-
-  ShoppingCartApplication(
-      this.getProducts, this.getSingleProduct, this.sendProduct);
+  final Products useCase;
+  ShoppingCartApplication(this.useCase);
 
   Future<Either<Failure, List<ProductEntity>>> fetchProducts() async {
-    return await getProducts();
+    return await useCase.callProducts();
   }
 
   Future<Either<Failure, ProductEntity>> fetchSingleProduct(
       int productId) async {
-    return await getSingleProduct(productId);
+    return await useCase.callSingleProduct(productId);
   }
 
   Future<Either<Failure, CartEntity>> sendProductToCart(CartEntity cart) async {
-    return await sendProductToCart(cart);
+    return await useCase.callSendProduct(cart);
   }
 }

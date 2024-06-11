@@ -5,3 +5,8 @@
 ## 0.0.2
 
 - Update config.
+
+## 0.0.3
+
+- Update usecase.
+- Update example.

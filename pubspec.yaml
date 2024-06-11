@@ -1,5 +1,5 @@
 name: dart_fake_store_api_wrapper
-description: The package simplifies operations using the Fake Store API.
+description: Simplifies Fake Store API queries, ideal for managing product data and shipping.
 version: 0.0.2
 repository: https://github.com/gearscrafter/dart_fake_store_api_wrapper.git
 

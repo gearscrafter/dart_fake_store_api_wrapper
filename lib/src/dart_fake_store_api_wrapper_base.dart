@@ -1,4 +1,4 @@
-import 'injection_container.dart' as di;
+import 'injection_container.dart' as dependency_injection;
 import 'application/shopping_cart_application.dart';
 import 'domain/entities/cart_entity.dart';
 import 'domain/entities/product_entity.dart';
@@ -12,11 +12,9 @@ class DartFakeStoreApiWrapper {
   }
 
   Future<void> _initializeShoppingCartApp() async {
-    di.InjectionContainer.instance.init();
+    dependency_injection.Container.instance.init();
     _shoppingCartApp = ShoppingCartApplication(
-      di.InjectionContainer.instance.getProducts,
-      di.InjectionContainer.instance.getSingleProduct,
-      di.InjectionContainer.instance.sendProductToCart,
+      dependency_injection.Container.instance.useCase,
     );
   }
 
@@ -37,7 +35,7 @@ class DartFakeStoreApiWrapper {
   }
 
   Future<ProductEntity> runFetchSingleProduct(int productId) async {
-    final result = await _shoppingCartApp.getSingleProduct(productId);
+    final result = await _shoppingCartApp.fetchSingleProduct(productId);
 
     return result.fold(
       (failure) {
@@ -52,7 +50,7 @@ class DartFakeStoreApiWrapper {
   }
 
   Future<CartEntity> runSendProductToCart(CartEntity cart) async {
-    final result = await _shoppingCartApp.sendProduct(cart);
+    final result = await _shoppingCartApp.sendProductToCart(cart);
 
     return result.fold(
       (failure) {
