@@ -1,6 +1,6 @@
 name: dart_fake_store_api_wrapper
 description: The package could provide an Application Programming Interface (API) that simplifies common operations, such as retrieving products, adding products to the cart, etc., using the Fake Store API.
-version: 1.0.0
+version: 0.0.1
 # repository: https://github.com/my_org/my_repo
 
 environment:
