@@ -1,7 +1,7 @@
 # Dart Fake Store API Wrapper
 
 [![pub package](https://img.shields.io/pub/v/dart_fake_store_api_wrapper.svg)](https://pub.dev/packages/dart_fake_store_api_wrapper)
-[![GitHub license](https://img.shields.io/github/license/gearscrafter/.svg)](https://github.com/tu_usuario/tu_repositorio/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/gearscrafter/dart_fake_store_api_wrapper/blob/main/LICENSE)
 
 Una biblioteca de Dart para interactuar con la [Fake Store API](https://fakestoreapi.com/). Este paquete proporciona una forma sencilla de realizar operaciones CRUD en productos y carritos de compra.
 
