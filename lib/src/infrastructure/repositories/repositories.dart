@@ -6,7 +6,6 @@ import 'package:dartz/dartz.dart';
 import '../../../dart_fake_store_api_wrapper.dart';
 import '../../core/errors/exceptions.dart';
 import '../../core/errors/failures.dart';
-import '../../domain/entities/product_entity.dart';
 import '../../domain/repositories/cart_repository.dart';
 import '../../domain/repositories/product_repository.dart';
 import '../datasources/remote_data_source.dart';

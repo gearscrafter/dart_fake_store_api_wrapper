@@ -17,7 +17,7 @@ Agrega la dependencia a tu archivo `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  dart_fake_store_api_wrapper: ^1.0.0
+  dart_fake_store_api_wrapper: ^0.0.1
 ```
 
 Luego, ejecuta:
@@ -68,13 +68,6 @@ void main() async {
 - En la carpeta `example` se incluye un ejemplo más completo de cómo utilizar este paquete.
 # API
 ## DartFakeStoreApiWrapper
-### initializeShoppingCartApp
-```
-Future<void> initializeShoppingCartApp();
-```
-
-Inicializa la aplicación de carrito de compras. Debe llamarse antes de realizar cualquier otra operación.
-
 ### runFetchProducts
 ```
 Future<List<ProductEntity>> runFetchProducts();

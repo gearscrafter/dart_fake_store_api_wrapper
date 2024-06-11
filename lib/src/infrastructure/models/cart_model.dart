@@ -1,7 +1,6 @@
-// La clase `CartModel` extiende la clase `CartEntity` del dominio y representa un modelo de carrito en el contexto del paquete.
-
 import '../../domain/entities/cart_entity.dart';
 
+// La clase `CartModel` extiende la clase `CartEntity` del dominio y representa un modelo de carrito en el contexto del paquete.
 class CartModel extends CartEntity {
   CartModel({
     int? id,
