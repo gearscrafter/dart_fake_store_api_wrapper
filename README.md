@@ -87,7 +87,7 @@ Future<ProductEntity> runFetchSingleProduct(int productId);
 ```
 Obtiene detalles de un solo producto por su ID.
 
-runSendProductToCart
+### runSendProductToCart
 ```
 Future<CartEntity> runSendProductToCart(CartEntity cart);
 ```
