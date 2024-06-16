@@ -23,7 +23,6 @@ void main() {
           'Debería devolver una lista de ProductModel cuando la llamada sea exitosa.',
           () async {
         // Arrange
-        // Mock your product list
         final products =
             productListJson.map((json) => ProductModel.fromJson(json)).toList();
 
@@ -53,7 +52,7 @@ void main() {
       test('Debería devolver un ProductModel cuando la llamada sea exitosa.',
           () async {
         // Arrange
-        final productId = 1; // Mock your product ID
+        final productId = 1;
         final product = ProductModel.fromJson(productJson); // Mock your product
         when(repository.getSingleProduct(productId))
             .thenAnswer((_) async => Right(product));
@@ -67,7 +66,7 @@ void main() {
 
       test('Debería devolver un Failure cuando la llamada falla.', () async {
         // Arrange
-        final productId = 1; // Mock your product ID
+        final productId = 1;
         final failure = GeneralFailure('Error all obtener al producto');
         when(repository.getSingleProduct(productId))
             .thenAnswer((_) async => Left(failure));

@@ -21,22 +21,37 @@ import 'package:dartz/dartz.dart';
 import '../core/errors/failures.dart';
 import '../domain/entities/cart_entity.dart';
 import '../domain/entities/product_entity.dart';
+import '../domain/entities/user_entity.dart';
 import '../domain/use_cases/products.dart';
+import '../domain/use_cases/users.dart';
 
 class ShoppingCartApplication {
-  final Products useCase;
-  ShoppingCartApplication(this.useCase);
+  final Products productUseCase;
+  final Users userUseCase;
+  ShoppingCartApplication(this.productUseCase, this.userUseCase);
 
   Future<Either<Failure, List<ProductEntity>>> fetchProducts() async {
-    return await useCase.callProducts();
+    return await productUseCase.callProducts();
   }
 
   Future<Either<Failure, ProductEntity>> fetchSingleProduct(
       int productId) async {
-    return await useCase.callSingleProduct(productId);
+    return await productUseCase.callSingleProduct(productId);
   }
 
   Future<Either<Failure, CartEntity>> sendProductToCart(CartEntity cart) async {
-    return await useCase.callSendProduct(cart);
+    return await productUseCase.callSendProduct(cart);
+  }
+
+  Future<Either<Failure, IdEntity>> sendRegister(UserEntity userData) async {
+    return await userUseCase.callRegister(userData);
+  }
+
+  Future<Either<Failure, TokenEntity>> sendSignIn(UserEntity userData) async {
+    return await userUseCase.callSignIn(userData);
+  }
+
+  Future<Either<Failure, UserEntity>> fetchInfo(String idUser) async {
+    return await userUseCase.callInfo(idUser);
   }
 }

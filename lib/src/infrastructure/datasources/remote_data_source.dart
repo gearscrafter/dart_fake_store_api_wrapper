@@ -3,6 +3,7 @@
 // `RemoteDataSourceImpl` es una implementación concreta de la interfaz `RemoteDataSource`.
 // Utiliza un cliente API (`ApiClient`) para realizar solicitudes HTTP a la Fake Store API y procesar las respuestas.
 
+import 'package:dart_fake_store_api_wrapper/src/domain/entities/user_entity.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../dart_fake_store_api_wrapper.dart';
@@ -10,6 +11,7 @@ import '../../core/errors/exceptions.dart';
 import '../../core/network/api_client.dart';
 import '../models/cart_model.dart';
 import '../models/product_model.dart';
+import '../models/user_model.dart';
 
 abstract class RemoteDataSource {
   // Obtiene una lista de productos desde la API.
@@ -20,6 +22,12 @@ abstract class RemoteDataSource {
 
   // Envía un producto a la API y devuelve el carrito actualizado.
   Future<CartEntity> sendProductToCart(CartEntity cart);
+
+  Future<IdEntity> registerUser(UserEntity user);
+
+  Future<TokenEntity> signInUser(UserEntity user);
+
+  Future<UserEntity> getInfoUser(String idUser);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -68,6 +76,59 @@ class RemoteDataSourceImpl implements RemoteDataSource {
           products: cartProducts);
       final dynamic data = await _apiClient.post('carts/', model.toJson());
       return CartModel.fromJson(data);
+    } catch (e) {
+      if (e is http.ClientException) {
+        throw GeneralException(message: 'Error de red: ${e.message}');
+      } else {
+        throw GeneralException(message: 'Error inesperado: ${e.toString()}');
+      }
+    }
+  }
+
+  @override
+  Future<UserEntity> getInfoUser(String idUser) async {
+    try {
+      final dynamic data = await _apiClient.get('users/$idUser');
+      return UserModel.fromJson(data);
+    } catch (e) {
+      if (e is http.ClientException) {
+        throw GeneralException(message: 'Error de red: ${e.message}');
+      } else {
+        throw GeneralException(message: 'Error inesperado: ${e.toString()}');
+      }
+    }
+  }
+
+  @override
+  Future<IdEntity> registerUser(UserEntity user) async {
+    try {
+      final model = UserModel(
+        username: user.username,
+        password: user.password,
+      );
+      final dynamic data = await _apiClient.post('auth/login', model.toJson());
+      return IdModel.fromJson(data);
+    } catch (e) {
+      if (e is http.ClientException) {
+        throw GeneralException(message: 'Error de red: ${e.message}');
+      } else {
+        throw GeneralException(message: 'Error inesperado: ${e.toString()}');
+      }
+    }
+  }
+
+  @override
+  Future<TokenEntity> signInUser(UserEntity user) async {
+    try {
+      final model = UserModel(
+          username: user.username,
+          password: user.password,
+          address: user.address,
+          email: user.email,
+          name: user.name,
+          phone: user.phone);
+      final dynamic data = await _apiClient.post('users', model.toJson());
+      return TokenModel.fromJson(data);
     } catch (e) {
       if (e is http.ClientException) {
         throw GeneralException(message: 'Error de red: ${e.message}');

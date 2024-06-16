@@ -5,7 +5,7 @@
 
 Una biblioteca de Dart para interactuar con la [Fake Store API](https://fakestoreapi.com/). Este paquete proporciona una forma sencilla de realizar operaciones CRUD en productos y carritos de compra.
 
-## Características
+## Características=
 
 - **Obtener productos**: Lista todos los productos disponibles.
 - **Obtener un solo producto**: Obtiene detalles de un producto por su ID.

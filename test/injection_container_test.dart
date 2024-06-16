@@ -1,4 +1,5 @@
 import 'package:dart_fake_store_api_wrapper/src/domain/use_cases/products.dart';
+import 'package:dart_fake_store_api_wrapper/src/domain/use_cases/users.dart';
 import 'package:dart_fake_store_api_wrapper/src/injection_container.dart';
 
 import 'package:test/test.dart';
@@ -14,7 +15,11 @@ void main() {
     });
 
     test('GetProducts devuelve una instancia válida', () {
-      expect(injectionContainer.useCase, isA<Products>());
+      expect(injectionContainer.productUseCase, isA<Products>());
+    });
+
+    test('GetProducts devuelve una instancia válida', () {
+      expect(injectionContainer.userUseCase, isA<Users>());
     });
   });
 }
