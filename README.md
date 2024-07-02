@@ -17,7 +17,7 @@ Agrega la dependencia a tu archivo `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  dart_fake_store_api_wrapper: ^0.0.3
+  dart_fake_store_api_wrapper: ^0.0.4
 ```
 
 Luego, ejecuta:

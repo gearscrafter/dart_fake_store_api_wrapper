@@ -10,3 +10,7 @@
 
 - Update usecase.
 - Update example.
+
+## 0.0.4
+
+- Update tests.
