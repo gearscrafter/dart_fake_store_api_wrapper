@@ -229,7 +229,7 @@ class CartProduct {
 ```
 Representa un producto dentro de un carrito de compras.
 ## Tests
-Para ejecutar los tests widgets y de integración, ejecuta el siguiente script:
+Para ejecutar los tests unitarios, ejecuta el siguiente script:
 ```
 chmod +x run_all_tests.sh
 ./run_all_tests.sh
