@@ -35,6 +35,7 @@ class Container {
 
     _productsRepository = Repositories(_remoteDataSource);
     _cartRepository = Repositories(_remoteDataSource);
+    _userRepository = Repositories(_remoteDataSource);
 
     _productUseCase = Products(_productsRepository, _cartRepository);
     _userUseCase = Users(_userRepository);

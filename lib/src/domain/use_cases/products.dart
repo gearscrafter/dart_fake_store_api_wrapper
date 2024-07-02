@@ -24,4 +24,8 @@ class Products {
   Future<Either<Failure, CartEntity>> callSendProduct(CartEntity cart) async {
     return await cartRepository.sendProductToCart(cart);
   }
+
+  Future<Either<Failure, List<String>>> callGetCategories() async {
+    return await productRepository.getCategories();
+  }
 }

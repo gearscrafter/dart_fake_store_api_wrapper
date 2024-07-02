@@ -3,7 +3,6 @@
 // `RemoteDataSourceImpl` es una implementación concreta de la interfaz `RemoteDataSource`.
 // Utiliza un cliente API (`ApiClient`) para realizar solicitudes HTTP a la Fake Store API y procesar las respuestas.
 
-import 'package:dart_fake_store_api_wrapper/src/domain/entities/user_entity.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../dart_fake_store_api_wrapper.dart';
@@ -28,6 +27,8 @@ abstract class RemoteDataSource {
   Future<TokenEntity> signInUser(UserEntity user);
 
   Future<UserEntity> getInfoUser(String idUser);
+
+  Future<List<String>> getCategories();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -129,6 +130,25 @@ class RemoteDataSourceImpl implements RemoteDataSource {
           phone: user.phone);
       final dynamic data = await _apiClient.post('users', model.toJson());
       return TokenModel.fromJson(data);
+    } catch (e) {
+      if (e is http.ClientException) {
+        throw GeneralException(message: 'Error de red: ${e.message}');
+      } else {
+        throw GeneralException(message: 'Error inesperado: ${e.toString()}');
+      }
+    }
+  }
+
+  @override
+  Future<List<String>> getCategories() async {
+    try {
+      final dynamic data = await _apiClient.get('products/categories');
+      if (data is List) {
+        return List<String>.from(data);
+      } else {
+        throw GeneralException(
+            message: 'Datos no válidos recibidos del servidor');
+      }
     } catch (e) {
       if (e is http.ClientException) {
         throw GeneralException(message: 'Error de red: ${e.message}');

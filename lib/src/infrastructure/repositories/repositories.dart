@@ -1,7 +1,6 @@
 // La clase `Repositories` implementa los repositorios de carrito y productos.
 // Utiliza un `RemoteDataSource` para realizar operaciones en la capa de data source.
 
-import 'package:dart_fake_store_api_wrapper/src/domain/entities/user_entity.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../dart_fake_store_api_wrapper.dart';
@@ -103,6 +102,22 @@ class Repositories
     try {
       final user = await remoteDataSource.signInUser(userData);
       return Right(user);
+    } catch (e) {
+      if (e is ServerException) {
+        return Left(ServerFailure('Error en el servidor'));
+      } else if (e is CacheException) {
+        return Left(CacheFailure('Error de caché'));
+      } else {
+        return Left(GeneralFailure('Error inesperado: ${e.toString()}'));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> getCategories() async {
+    try {
+      final categories = await remoteDataSource.getCategories();
+      return Right(categories);
     } catch (e) {
       if (e is ServerException) {
         return Left(ServerFailure('Error en el servidor'));

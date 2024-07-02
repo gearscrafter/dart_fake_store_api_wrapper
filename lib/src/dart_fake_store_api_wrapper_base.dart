@@ -8,8 +8,12 @@ import 'domain/entities/product_entity.dart';
 class DartFakeStoreApiWrapper {
   late final ShoppingCartApplication _shoppingCartApp;
 
-  DartFakeStoreApiWrapper() {
-    _initializeShoppingCartApp();
+  DartFakeStoreApiWrapper([ShoppingCartApplication? shoppingCartApp]) {
+    if (shoppingCartApp == null) {
+      _initializeShoppingCartApp();
+    } else {
+      _shoppingCartApp = shoppingCartApp;
+    }
   }
 
   Future<void> _initializeShoppingCartApp() async {
@@ -109,6 +113,21 @@ class DartFakeStoreApiWrapper {
     );
   }
 
+  Future<List<String>> runFetchCategories() async {
+    final result = await _shoppingCartApp.fetchCategories();
+
+    return result.fold(
+      (failure) {
+        throw Exception('Error al obtener las categorias: ${failure.message}');
+      },
+      (categories) {
+        print('\nSe obtuvo la lista de categorias:');
+        _printCategories(categories);
+        return categories;
+      },
+    );
+  }
+
   static void _printProductDetails(ProductEntity product) {
     print('======= Detalle del producto ======');
     print('ID: ${product.id}');
@@ -143,5 +162,12 @@ class DartFakeStoreApiWrapper {
     print('Calle: ${user.address?.street ?? ''}');
     print('Latitud: ${user.address?.geolocation.lat ?? ''}');
     print('Longitud: ${user.address?.geolocation.long ?? ''}');
+  }
+
+  static void _printCategories(List<String> object) {
+    print('======= Detalle del producto ======');
+    for (var category in object) {
+      print('category: $category ⭐');
+    }
   }
 }

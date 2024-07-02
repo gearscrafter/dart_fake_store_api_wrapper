@@ -28,3 +28,10 @@ final productJson = {
   "image": "image_url_1",
   "rating": {"rate": 4.5, "count": 120}
 };
+
+final categoryList = [
+  "electronics",
+  "jewelery",
+  "men's clothing",
+  "women's clothing"
+];

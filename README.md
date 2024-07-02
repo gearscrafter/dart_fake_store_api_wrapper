@@ -165,6 +165,12 @@ Future<CartEntity> runSendProductToCart(CartEntity cart);
 ```
 Agrega un producto al carrito de compra.
 
+### runFetchCategories
+```
+Future<List<CategoryEntity>> runFetchCategories();
+```
+Lista las categorías disponibles
+
 ## Modelos
 ### ProductEntity
 ```
@@ -207,7 +213,6 @@ class CartEntity {
   });
 }
 ```
-
 Representa un carrito de compras.
 
 ### CartProduct
@@ -223,6 +228,19 @@ class CartProduct {
 }
 ```
 Representa un producto dentro de un carrito de compras.
+## Tests
+Para ejecutar los tests widgets y de integración, ejecuta el siguiente script:
+```
+chmod +x run_all_tests.sh
+./run_all_tests.sh
+```
+### Informe de covertura
+![Imagen](/assets/images/coverage.png)
+
+Para abrir el test de cobertura, ejecuta el siguiente comando:
+```
+open coverage/html/index.html
+```
 
 ## Contribuir
 Si deseas contribuir a este proyecto, sigue los pasos a continuación:

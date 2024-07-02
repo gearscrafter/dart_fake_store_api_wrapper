@@ -79,4 +79,32 @@ void main() {
       });
     });
   });
+
+  group('getCategories', () {
+    test(
+        'devuelve una lista de categorías si la llamada al remoteDataSource es exitosa',
+        () async {
+      // Arrange
+      when(repository.getCategories())
+          .thenAnswer((_) async => Right(categoryList));
+
+      // Act
+      final result = await repository.getCategories();
+
+      // Assert
+      expect(result, equals(Right(categoryList)));
+    });
+
+    test('devuelve GeneralFailure cuando ocurre un error inesperado', () async {
+      final failure = GeneralFailure('Error all obtener las categorias');
+      // Arrange
+      when(repository.getCategories()).thenAnswer((_) async => Left(failure));
+
+      // Act
+      final result = await repository.getCategories();
+
+      // Assert
+      expect(result, equals(Left(failure)));
+    });
+  });
 }

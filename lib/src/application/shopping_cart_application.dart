@@ -54,4 +54,8 @@ class ShoppingCartApplication {
   Future<Either<Failure, UserEntity>> fetchInfo(String idUser) async {
     return await userUseCase.callInfo(idUser);
   }
+
+  Future<Either<Failure, List<String>>> fetchCategories() async {
+    return await productUseCase.callGetCategories();
+  }
 }
