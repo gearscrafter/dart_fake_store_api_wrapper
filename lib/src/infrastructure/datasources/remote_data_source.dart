@@ -131,13 +131,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<TokenEntity> signInUser(UserEntity user) async {
     try {
-      final model = UserModel(
-          username: user.username,
-          password: user.password,
-          address: user.address,
-          email: user.email,
-          name: user.name,
-          phone: user.phone);
+      final model = UserModel(username: user.username, password: user.password);
       final dynamic data = await _apiClient.post('auth/login', model.toJson());
       return TokenModel.fromJson(data);
     } catch (e) {
