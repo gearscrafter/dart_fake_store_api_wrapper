@@ -117,7 +117,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
               number: 3,
               zipcode: '12926-3874',
               geolocation: GeolocationModel(lat: '-37.3159', long: '81.1496')));
-      final dynamic data = await _apiClient.post('auth/login', model.toJson());
+      final dynamic data = await _apiClient.post('users', model.toJson());
       return IdModel.fromJson(data);
     } catch (e) {
       if (e is http.ClientException) {
@@ -138,7 +138,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
           email: user.email,
           name: user.name,
           phone: user.phone);
-      final dynamic data = await _apiClient.post('users', model.toJson());
+      final dynamic data = await _apiClient.post('auth/login', model.toJson());
       return TokenModel.fromJson(data);
     } catch (e) {
       if (e is http.ClientException) {
