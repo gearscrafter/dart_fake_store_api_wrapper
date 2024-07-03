@@ -104,9 +104,17 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<IdEntity> registerUser(UserEntity user) async {
     try {
       final model = UserModel(
-        username: user.username,
-        password: user.password,
-      );
+          username: user.username,
+          password: user.password,
+          email: user.email,
+          name: user.name,
+          phone: user.phone,
+          address: AddressModel(
+              city: 'kilcoole',
+              street: '7835 new road',
+              number: 3,
+              zipcode: '12926-3874',
+              geolocation: GeolocationModel(lat: '-37.3159', long: '81.1496')));
       final dynamic data = await _apiClient.post('auth/login', model.toJson());
       return IdModel.fromJson(data);
     } catch (e) {
