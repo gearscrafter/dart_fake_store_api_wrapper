@@ -107,7 +107,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
           username: user.username,
           password: user.password,
           email: user.email,
-          name: NameEntity(
+          name: NameModel(
               firstname: user.name?.firstname ?? '',
               lastname: user.name?.lastname ?? ''),
           phone: user.phone,
