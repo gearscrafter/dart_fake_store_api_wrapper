@@ -26,8 +26,8 @@ class UserModel extends UserEntity {
         'email': email,
         'username': username,
         'password': password,
-        'name': (name as NameModel).toJson(),
-        'address': (address as AddressModel).toJson(),
+        'name': name != null ? (name as NameModel).toJson() : null,
+        'address': address != null ? (address as AddressModel).toJson() : null,
         'phone': phone,
       };
 
