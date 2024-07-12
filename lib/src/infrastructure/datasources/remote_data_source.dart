@@ -4,7 +4,6 @@
 // Utiliza un cliente API (`ApiClient`) para realizar solicitudes HTTP a la Fake Store API y procesar las respuestas.
 
 import 'package:http/http.dart' as http;
-
 import '../../../dart_fake_store_api_wrapper.dart';
 import '../../core/errors/exceptions.dart';
 import '../../core/network/api_client.dart';
@@ -12,28 +11,38 @@ import '../models/cart_model.dart';
 import '../models/product_model.dart';
 import '../models/user_model.dart';
 
+/// `RemoteDataSource` es una interfaz abstracta para interactuar con la API de Fake Store.
 abstract class RemoteDataSource {
-  // Obtiene una lista de productos desde la API.
+  /// Obtiene una lista de productos desde la API.
   Future<List<ProductEntity>> getProducts();
 
-  // Obtiene un producto específico por su identificador desde la API.
+  /// Obtiene un producto específico por su identificador desde la API.
   Future<ProductEntity> getSingleProduct(int productId);
 
-  // Envía un producto a la API y devuelve el carrito actualizado.
+  /// Envía un producto a la API y devuelve el carrito actualizado.
   Future<CartEntity> sendProductToCart(CartEntity cart);
 
+  /// Registra un nuevo usuario en la API.
   Future<IdEntity> registerUser(UserEntity user);
 
+  /// Inicia sesión de un usuario en la API.
   Future<TokenEntity> signInUser(UserEntity user);
 
+  /// Obtiene la información de un usuario desde la API.
   Future<UserEntity> getInfoUser(String idUser);
 
+  /// Obtiene una lista de categorías desde la API.
   Future<List<String>> getCategories();
 }
 
+/// `RemoteDataSourceImpl` es una implementación concreta de la interfaz `RemoteDataSource`.
 class RemoteDataSourceImpl implements RemoteDataSource {
+  /// Cliente API para realizar solicitudes HTTP.
   final ApiClient _apiClient;
+
+  /// Constructor que recibe un cliente API.
   RemoteDataSourceImpl(this._apiClient);
+
   @override
   Future<List<ProductEntity>> getProducts() async {
     try {

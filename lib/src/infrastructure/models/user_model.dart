@@ -1,16 +1,14 @@
 import '../../domain/entities/user_entity.dart';
 
-/// La clase `User` representa un usuario en el contexto de tu aplicación.
+/// La clase `UserModel` representa un usuario en el contexto de tu aplicación.
 ///
 /// Tiene los siguientes atributos:
 /// - `email`: El correo electrónico del usuario.
 /// - `username`: El nombre de usuario del usuario.
 /// - `password`: La contraseña del usuario.
-/// - `name`: Una instancia de la clase `Name` que representa el nombre del usuario.
-/// - `address`: Una instancia de la clase `Address` que representa la dirección del usuario.
+/// - `name`: Una instancia de la clase `NameModel` que representa el nombre del usuario.
+/// - `address`: Una instancia de la clase `AddressModel` que representa la dirección del usuario.
 /// - `phone`: El número de teléfono del usuario.
-/// - `id`: Una instancia de la clase `Id` que representa el ID del usuario.
-/// - `token`: Una instancia de la clase `Token` que representa el token de autenticación del usuario.
 class UserModel extends UserEntity {
   UserModel({
     super.email,
@@ -21,7 +19,7 @@ class UserModel extends UserEntity {
     super.phone,
   });
 
-  // Convertir User a JSON
+  /// Convertir User a JSON.
   Map<String, dynamic> toJson() => {
         'email': email,
         'username': username,
@@ -31,7 +29,7 @@ class UserModel extends UserEntity {
         'phone': phone,
       };
 
-  // Crear User desde JSON
+  /// Crear User desde JSON.
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         email: json['email'],
         username: json['username'],
@@ -44,7 +42,7 @@ class UserModel extends UserEntity {
       );
 }
 
-/// La clase `Name` representa el nombre de un usuario.
+/// La clase `NameModel` representa el nombre de un usuario.
 ///
 /// Tiene los siguientes atributos:
 /// - `firstname`: El primer nombre del usuario.
@@ -55,27 +53,27 @@ class NameModel extends NameEntity {
     required super.lastname,
   });
 
-  // Convertir Name a JSON
+  /// Convertir Name a JSON.
   Map<String, dynamic> toJson() => {
         'firstname': firstname,
         'lastname': lastname,
       };
 
-  // Crear Name desde JSON
+  /// Crear Name desde JSON.
   factory NameModel.fromJson(Map<String, dynamic> json) => NameModel(
         firstname: json['firstname'],
         lastname: json['lastname'],
       );
 }
 
-/// La clase `Address` representa la dirección de un usuario.
+/// La clase `AddressModel` representa la dirección de un usuario.
 ///
 /// Tiene los siguientes atributos:
 /// - `city`: La ciudad.
 /// - `street`: La calle.
 /// - `number`: El número.
 /// - `zipcode`: El código postal.
-/// - `geolocation`: Una instancia de la clase `Geolocation` que representa la geolocalización.
+/// - `geolocation`: Una instancia de la clase `GeolocationModel` que representa la geolocalización.
 class AddressModel extends AddressEntity {
   AddressModel({
     required super.city,
@@ -85,7 +83,7 @@ class AddressModel extends AddressEntity {
     required super.geolocation,
   });
 
-  // Convertir Address a JSON
+  /// Convertir Address a JSON.
   Map<String, dynamic> toJson() => {
         'city': city,
         'street': street,
@@ -94,7 +92,7 @@ class AddressModel extends AddressEntity {
         'geolocation': (geolocation as GeolocationModel).toJson(),
       };
 
-  // Crear Address desde JSON
+  /// Crear Address desde JSON.
   factory AddressModel.fromJson(Map<String, dynamic> json) => AddressModel(
         city: json['city'],
         street: json['street'],
@@ -104,7 +102,7 @@ class AddressModel extends AddressEntity {
       );
 }
 
-/// La clase `Geolocation` representa la geolocalización.
+/// La clase `GeolocationModel` representa la geolocalización.
 ///
 /// Tiene los siguientes atributos:
 /// - `lat`: La latitud.
@@ -115,13 +113,13 @@ class GeolocationModel extends GeolocationEntity {
     required super.long,
   });
 
-  // Convertir Geolocation a JSON
+  /// Convertir Geolocation a JSON.
   Map<String, dynamic> toJson() => {
         'lat': lat,
         'long': long,
       };
 
-  // Crear Geolocation desde JSON
+  /// Crear Geolocation desde JSON.
   factory GeolocationModel.fromJson(Map<String, dynamic> json) =>
       GeolocationModel(
         lat: json['lat'],
@@ -129,37 +127,37 @@ class GeolocationModel extends GeolocationEntity {
       );
 }
 
-/// La clase `Id` representa el identificador del usuario.
+/// La clase `IdModel` representa el identificador del usuario.
 ///
 /// Tiene el siguiente atributo:
 /// - `id`: El identificador.
 class IdModel extends IdEntity {
   IdModel({required super.id});
 
-  // Convertir Id a JSON
+  /// Convertir Id a JSON.
   Map<String, dynamic> toJson() => {
         'id': id,
       };
 
-  // Crear Id desde JSON
+  /// Crear Id desde JSON.
   factory IdModel.fromJson(Map<String, dynamic> json) => IdModel(
         id: json['id'],
       );
 }
 
-/// La clase `Token` representa el token de autenticación del usuario.
+/// La clase `TokenModel` representa el token de autenticación del usuario.
 ///
 /// Tiene el siguiente atributo:
 /// - `token`: El token.
 class TokenModel extends TokenEntity {
   TokenModel({required super.token});
 
-  // Convertir Token a JSON
+  /// Convertir Token a JSON.
   Map<String, dynamic> toJson() => {
         'token': token,
       };
 
-  // Crear Token desde JSON
+  /// Crear Token desde JSON.
   factory TokenModel.fromJson(Map<String, dynamic> json) => TokenModel(
         token: json['token'],
       );

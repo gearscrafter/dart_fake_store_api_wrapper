@@ -1,7 +1,13 @@
 import '../../domain/entities/cart_entity.dart';
 
-// La clase `CartModel` extiende la clase `CartEntity` del dominio y representa un modelo de carrito en el contexto del paquete.
+/// La clase `CartModel` extiende la clase `CartEntity` del dominio y representa un modelo de carrito en el contexto del paquete.
 class CartModel extends CartEntity {
+  /// Constructor para crear una instancia de `CartModel`.
+  ///
+  /// - [id]: ID del carrito (opcional).
+  /// - [userId]: ID del usuario asociado al carrito.
+  /// - [date]: Fecha de creación del carrito.
+  /// - [products]: Lista de productos en el carrito.
   CartModel({
     int? id,
     required super.userId,
@@ -9,6 +15,7 @@ class CartModel extends CartEntity {
     required List<ProductQuantityModel> super.products,
   });
 
+  /// Crea una instancia de `CartModel` a partir de un mapa JSON.
   factory CartModel.fromJson(Map<String, dynamic> json) {
     return CartModel(
       id: json['id'],
@@ -20,6 +27,7 @@ class CartModel extends CartEntity {
     );
   }
 
+  /// Convierte el objeto `CartModel` en un mapa JSON.
   Map<String, dynamic> toJson() {
     return {
       'userId': userId,
@@ -31,11 +39,16 @@ class CartModel extends CartEntity {
 
 /// La clase `ProductQuantityModel` extiende la clase `ProductQuantityEntity` del dominio y representa un modelo de cantidad de producto en el contexto del paquete.
 class ProductQuantityModel extends ProductQuantityEntity {
+  /// Constructor para crear una instancia de `ProductQuantityModel`.
+  ///
+  /// - [productId]: ID del producto.
+  /// - [quantity]: Cantidad del producto.
   ProductQuantityModel({
     required super.productId,
     required super.quantity,
   });
 
+  /// Crea una instancia de `ProductQuantityModel` a partir de un mapa JSON.
   factory ProductQuantityModel.fromJson(Map<String, dynamic> json) {
     return ProductQuantityModel(
       productId: json['productId'],

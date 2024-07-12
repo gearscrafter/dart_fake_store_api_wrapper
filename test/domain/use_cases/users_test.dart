@@ -33,27 +33,21 @@ void main() {
 
       test('debería retornar Right con IdEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockUserRepository.register(userData))
             .thenAnswer((_) async => Right(idEntity));
 
-        // Act
         final result = await users.callRegister(userData);
 
-        // Assert
         expect(result, Right(idEntity));
       });
 
       test('debería retornar Failure cuando la llamada falla', () async {
-        // Arrange
         final failure = ServerFailure('Error en el servidor');
         when(mockUserRepository.register(userData))
             .thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await users.callRegister(userData);
 
-        // Assert
         expect(result, Left(failure));
       });
     });
@@ -72,27 +66,21 @@ void main() {
       test(
           'debería retornar Right con TokenEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockUserRepository.signIn(userData))
             .thenAnswer((_) async => Right(tokenEntity));
 
-        // Act
         final result = await users.callSignIn(userData);
 
-        // Assert
         expect(result, Right(tokenEntity));
       });
 
       test('debería retornar Failure cuando la llamada falla', () async {
-        // Arrange
         final failure = ServerFailure('Error en el servidor');
         when(mockUserRepository.signIn(userData))
             .thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await users.callSignIn(userData);
 
-        // Assert
         expect(result, Left(failure));
       });
     });
@@ -128,15 +116,12 @@ void main() {
       });
 
       test('debería retornar Failure cuando la llamada falla', () async {
-        // Arrange
         final failure = ServerFailure('Error en el servidor');
         when(mockUserRepository.getInfo(idUser))
             .thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await users.callInfo(idUser);
 
-        // Assert
         expect(result, Left(failure));
       });
     });

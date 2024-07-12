@@ -43,40 +43,36 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> fetchData() async {
-    try {
-      // Obtener todos los productos
-      final productos = await _apiWrapper.runFetchProducts();
-      setState(() {
-        productsObtained = 'Productos obtenidos: ${productos.length}';
-      });
+    // Obtener todos los productos
+    final productos = await _apiWrapper.runFetchProducts();
+    setState(() {
+      productsObtained = 'Productos obtenidos: ${productos.length}';
+    });
 
-      // Obtener un solo producto por ID
-      final producto = await _apiWrapper.runFetchSingleProduct(1);
-      setState(() {
-        singleProductObtained = 'Producto obtenido: ${producto.title}';
-      });
+    // Obtener un solo producto por ID
+    final producto = await _apiWrapper.runFetchSingleProduct(1);
+    setState(() {
+      singleProductObtained = 'Producto obtenido: ${producto.title}';
+    });
 
-      // Enviar un producto al carrito
-      final cart = CartEntity(
-        userId: 1,
-        date: DateTime.now(),
-        products: [
-          ProductQuantityEntity(
-            productId: 1,
-            quantity: 2,
-          ),
-        ],
-      );
-      final carrito = await _apiWrapper.runSendProductToCart(cart);
-      setState(() {
-        for (var cart in carrito.products) {
-          productAddedToCart =
-              'Cantidad de productos enviados al carrito: ${cart.quantity}';
-        }
-      });
-    } catch (e) {
-      print(e);
-    }
+    // Enviar un producto al carrito
+    final cart = CartEntity(
+      userId: 1,
+      date: DateTime.now(),
+      products: [
+        ProductQuantityEntity(
+          productId: 1,
+          quantity: 2,
+        ),
+      ],
+    );
+    final carrito = await _apiWrapper.runSendProductToCart(cart);
+    setState(() {
+      for (var cart in carrito.products) {
+        productAddedToCart =
+            'Cantidad de productos enviados al carrito: ${cart.quantity}';
+      }
+    });
   }
 
   @override

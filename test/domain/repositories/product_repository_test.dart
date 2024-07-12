@@ -22,28 +22,22 @@ void main() {
       test(
           'Debería devolver una lista de ProductModel cuando la llamada sea exitosa.',
           () async {
-        // Arrange
         final products =
             productListJson.map((json) => ProductModel.fromJson(json)).toList();
 
         when(repository.getProducts()).thenAnswer((_) async => Right(products));
 
-        // Act
         final result = await repository.getProducts();
 
-        // Assert
         expect(result, equals(Right(products)));
       });
 
       test('Debería devolver un Failure cuando la llamada falla.', () async {
-        // Arrange
         final failure = GeneralFailure('Error all obtener los productos');
         when(repository.getProducts()).thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await repository.getProducts();
 
-        // Assert
         expect(result, equals(Left(failure)));
       });
     });
@@ -57,24 +51,19 @@ void main() {
         when(repository.getSingleProduct(productId))
             .thenAnswer((_) async => Right(product));
 
-        // Act
         final result = await repository.getSingleProduct(productId);
 
-        // Assert
         expect(result, equals(Right(product)));
       });
 
       test('Debería devolver un Failure cuando la llamada falla.', () async {
-        // Arrange
         final productId = 1;
         final failure = GeneralFailure('Error all obtener al producto');
         when(repository.getSingleProduct(productId))
             .thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await repository.getSingleProduct(productId);
 
-        // Assert
         expect(result, equals(Left(failure)));
       });
     });
@@ -84,26 +73,21 @@ void main() {
     test(
         'devuelve una lista de categorías si la llamada al remoteDataSource es exitosa',
         () async {
-      // Arrange
       when(repository.getCategories())
           .thenAnswer((_) async => Right(categoryList));
 
-      // Act
       final result = await repository.getCategories();
 
-      // Assert
       expect(result, equals(Right(categoryList)));
     });
 
     test('devuelve GeneralFailure cuando ocurre un error inesperado', () async {
       final failure = GeneralFailure('Error all obtener las categorias');
-      // Arrange
+
       when(repository.getCategories()).thenAnswer((_) async => Left(failure));
 
-      // Act
       final result = await repository.getCategories();
 
-      // Assert
       expect(result, equals(Left(failure)));
     });
   });

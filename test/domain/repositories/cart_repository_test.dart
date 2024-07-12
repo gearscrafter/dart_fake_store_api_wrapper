@@ -20,31 +20,25 @@ void main() {
   group('sendProductToCart', () {
     test('debería devolver un CartModel cuando la llamada sea exitosa',
         () async {
-      // Arrange
       final cartModel =
           CartModel(userId: 1, date: DateTime.now(), products: []);
       when(mockRepository.sendProductToCart(cartModel))
           .thenAnswer((_) async => Right(cartModel));
 
-      // Act
       final result = await mockRepository.sendProductToCart(cartModel);
 
-      // Assert
       expect(result, Right(cartModel));
     });
 
     test('debería lanzar un Failure cuando la llamada falle', () async {
-      // Arrange
       final cartModel =
           CartModel(userId: 1, date: DateTime.now(), products: []);
       final failure = ServerFailure('Error inesperado');
       when(mockRepository.sendProductToCart(cartModel))
           .thenAnswer((_) async => Left(failure));
 
-      // Act
       final result = await mockRepository.sendProductToCart(cartModel);
 
-      // Assert
       expect(result, Left(failure));
     });
   });

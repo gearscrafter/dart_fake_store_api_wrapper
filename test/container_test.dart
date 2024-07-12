@@ -25,25 +25,14 @@ import 'container_test.mocks.dart';
 ])
 void main() {
   late MockContainer container;
-  late MockApiClient mockApiClient;
-  late MockRemoteDataSource mockRemoteDataSource;
-  late MockProductsRepository mockProductsRepository;
-  late MockCartRepository mockCartRepository;
-  late MockUserRepository mockUserRepository;
   late MockProducts mockProductUseCase;
   late MockUsers mockUserUseCase;
 
   setUp(() {
     container = MockContainer();
-    mockApiClient = MockApiClient();
-    mockRemoteDataSource = MockRemoteDataSource();
-    mockProductsRepository = MockProductsRepository();
-    mockCartRepository = MockCartRepository();
-    mockUserRepository = MockUserRepository();
     mockProductUseCase = MockProducts();
     mockUserUseCase = MockUsers();
 
-    // Configura los stubs para los métodos productUseCase y userUseCase
     when(container.productUseCase).thenReturn(mockProductUseCase);
     when(container.userUseCase).thenReturn(mockUserUseCase);
 

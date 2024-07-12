@@ -9,7 +9,6 @@ import 'package:dart_fake_store_api_wrapper/src/application/shopping_cart_applic
 
 import 'dart_fake_store_api_wrapper_base_test.mocks.dart';
 
-// Generar mocks para ShoppingCartApplication y sus casos de uso
 @GenerateMocks([ShoppingCartApplication])
 void main() {
   late MockShoppingCartApplication mockShoppingCartApplication;
@@ -100,24 +99,19 @@ void main() {
 
       test('debería devolver un CartEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockShoppingCartApplication.sendProductToCart(cart))
             .thenAnswer((_) async => Right(cart));
 
-        // Act
         final result = await apiWrapper.runSendProductToCart(cart);
 
-        // Assert
         expect(result, cart);
         verify(mockShoppingCartApplication.sendProductToCart(cart)).called(1);
       });
 
       test('debería lanzar una excepción cuando la llamada falla', () async {
-        // Arrange
         when(mockShoppingCartApplication.sendProductToCart(cart))
             .thenAnswer((_) async => Left(GeneralFailure('Error')));
 
-        // Act & Assert
         expect(() => apiWrapper.runSendProductToCart(cart), throwsException);
       });
     });
@@ -132,20 +126,16 @@ void main() {
         when(mockShoppingCartApplication.sendRegister(user))
             .thenAnswer((_) async => Right(idEntity));
 
-        // Act
         final result = await apiWrapper.runSendRegister(user);
 
-        // Assert
         expect(result, idEntity);
         verify(mockShoppingCartApplication.sendRegister(user)).called(1);
       });
 
       test('debería lanzar una excepción cuando la llamada falla', () async {
-        // Arrange
         when(mockShoppingCartApplication.sendRegister(user))
             .thenAnswer((_) async => Left(GeneralFailure('Error')));
 
-        // Act & Assert
         expect(() => apiWrapper.runSendRegister(user), throwsException);
       });
     });
@@ -156,24 +146,19 @@ void main() {
 
       test('debería devolver un TokenEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockShoppingCartApplication.sendSignIn(user))
             .thenAnswer((_) async => Right(tokenEntity));
 
-        // Act
         final result = await apiWrapper.runSendSignIn(user);
 
-        // Assert
         expect(result, tokenEntity);
         verify(mockShoppingCartApplication.sendSignIn(user)).called(1);
       });
 
       test('debería lanzar una excepción cuando la llamada falla', () async {
-        // Arrange
         when(mockShoppingCartApplication.sendSignIn(user))
             .thenAnswer((_) async => Left(GeneralFailure('Error')));
 
-        // Act & Assert
         expect(() => apiWrapper.runSendSignIn(user), throwsException);
       });
     });
@@ -196,24 +181,19 @@ void main() {
 
       test('debería devolver un UserEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockShoppingCartApplication.fetchInfo('1'))
             .thenAnswer((_) async => Right(user));
 
-        // Act
         final result = await apiWrapper.runFetchInfo('1');
 
-        // Assert
         expect(result, user);
         verify(mockShoppingCartApplication.fetchInfo('1')).called(1);
       });
 
       test('debería lanzar una excepción cuando la llamada falla', () async {
-        // Arrange
         when(mockShoppingCartApplication.fetchInfo('1'))
             .thenAnswer((_) async => Left(GeneralFailure('Error')));
 
-        // Act & Assert
         expect(() => apiWrapper.runFetchInfo('1'), throwsException);
       });
     });
@@ -224,24 +204,18 @@ void main() {
       test(
           'debería devolver una lista de categorías cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockShoppingCartApplication.fetchCategories())
             .thenAnswer((_) async => Right(categories));
 
-        // Act
         final result = await apiWrapper.runFetchCategories();
-
-        // Assert
         expect(result, categories);
         verify(mockShoppingCartApplication.fetchCategories()).called(1);
       });
 
       test('debería lanzar una excepción cuando la llamada falla', () async {
-        // Arrange
         when(mockShoppingCartApplication.fetchCategories())
             .thenAnswer((_) async => Left(GeneralFailure('Error')));
 
-        // Act & Assert
         expect(() => apiWrapper.runFetchCategories(), throwsException);
       });
     });

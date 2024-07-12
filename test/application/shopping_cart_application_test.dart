@@ -29,27 +29,21 @@ void main() {
       test(
           'debería retornar Right con lista de ProductEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockProducts.callProducts())
             .thenAnswer((_) async => Right(productList));
 
-        // Act
         final result = await app.fetchProducts();
 
-        // Assert
         expect(result, Right(productList));
       });
 
       test('debería retornar Failure cuando la llamada falla', () async {
-        // Arrange
         final failure = ServerFailure('Error en el servidor');
         when(mockProducts.callProducts())
             .thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await app.fetchProducts();
 
-        // Assert
         expect(result, Left(failure));
       });
     });
@@ -69,27 +63,21 @@ void main() {
       test(
           'debería retornar Right con ProductEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockProducts.callSingleProduct(productId))
             .thenAnswer((_) async => Right(product));
 
-        // Act
         final result = await app.fetchSingleProduct(productId);
 
-        // Assert
         expect(result, Right(product));
       });
 
       test('debería retornar Failure cuando la llamada falla', () async {
-        // Arrange
         final failure = ServerFailure('Error en el servidor');
         when(mockProducts.callSingleProduct(productId))
             .thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await app.fetchSingleProduct(productId);
 
-        // Assert
         expect(result, Left(failure));
       });
     });
@@ -100,27 +88,21 @@ void main() {
 
       test('debería retornar Right con CartEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockProducts.callSendProduct(cart))
             .thenAnswer((_) async => Right(cart));
 
-        // Act
         final result = await app.sendProductToCart(cart);
 
-        // Assert
         expect(result, Right(cart));
       });
 
       test('debería retornar Failure cuando la llamada falla', () async {
-        // Arrange
         final failure = ServerFailure('Error en el servidor');
         when(mockProducts.callSendProduct(cart))
             .thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await app.sendProductToCart(cart);
 
-        // Assert
         expect(result, Left(failure));
       });
     });
@@ -138,27 +120,21 @@ void main() {
 
       test('debería retornar Right con IdEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockUsers.callRegister(userData))
             .thenAnswer((_) async => Right(idEntity));
 
-        // Act
         final result = await app.sendRegister(userData);
 
-        // Assert
         expect(result, Right(idEntity));
       });
 
       test('debería retornar Failure cuando la llamada falla', () async {
-        // Arrange
         final failure = ServerFailure('Error en el servidor');
         when(mockUsers.callRegister(userData))
             .thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await app.sendRegister(userData);
 
-        // Assert
         expect(result, Left(failure));
       });
     });
@@ -177,27 +153,21 @@ void main() {
       test(
           'debería retornar Right con TokenEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockUsers.callSignIn(userData))
             .thenAnswer((_) async => Right(tokenEntity));
 
-        // Act
         final result = await app.sendSignIn(userData);
 
-        // Assert
         expect(result, Right(tokenEntity));
       });
 
       test('debería retornar Failure cuando la llamada falla', () async {
-        // Arrange
         final failure = ServerFailure('Error en el servidor');
         when(mockUsers.callSignIn(userData))
             .thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await app.sendSignIn(userData);
 
-        // Assert
         expect(result, Left(failure));
       });
     });
@@ -221,26 +191,20 @@ void main() {
 
       test('debería retornar Right con UserEntity cuando la llamada es exitosa',
           () async {
-        // Arrange
         when(mockUsers.callInfo(idUser))
             .thenAnswer((_) async => Right(userEntity));
 
-        // Act
         final result = await app.fetchInfo(idUser);
 
-        // Assert
         expect(result, Right(userEntity));
       });
 
       test('debería retornar Failure cuando la llamada falla', () async {
-        // Arrange
         final failure = ServerFailure('Error en el servidor');
         when(mockUsers.callInfo(idUser)).thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await app.fetchInfo(idUser);
 
-        // Assert
         expect(result, Left(failure));
       });
     });
@@ -260,23 +224,18 @@ void main() {
         when(mockProducts.callGetCategories())
             .thenAnswer((_) async => Right(categories));
 
-        // Act
         final result = await app.fetchCategories();
 
-        // Assert
         expect(result, Right(categories));
       });
 
       test('debería retornar Failure cuando la llamada falla', () async {
-        // Arrange
         final failure = ServerFailure('Error en el servidor');
         when(mockProducts.callGetCategories())
             .thenAnswer((_) async => Left(failure));
 
-        // Act
         final result = await app.fetchCategories();
 
-        // Assert
         expect(result, Left(failure));
       });
     });

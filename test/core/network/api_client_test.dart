@@ -24,7 +24,6 @@ void main() {
     group('get', () {
       test('debería devolver datos si la llamada al endpoint es exitosa (200)',
           () async {
-        // Arrange
         final responseJson = jsonEncode([
           {"id": 1, "title": "Product 1"},
           {"id": 2, "title": "Product 2"}
@@ -33,20 +32,16 @@ void main() {
         when(mockHttpClient.get(Uri.parse('$baseUrl$endpoint')))
             .thenAnswer((_) async => http.Response(responseJson, 200));
 
-        // Act
         final result = await apiClient.get(endpoint);
 
-        // Assert
         expect(result, isA<List<dynamic>>());
         expect(result.length, 20);
       });
 
       test('debería lanzar ServerException si el estado es 500', () async {
-        // Arrange
         when(mockHttpClient.get(Uri.parse('$baseUrl$endpoint')))
             .thenAnswer((_) async => http.Response('Server Error', 500));
 
-        // Act
         try {
           await apiClient.get(endpoint);
         } catch (e) {
@@ -57,11 +52,9 @@ void main() {
       test(
           'debería lanzar GeneralException si el estado es diferente a 200 y 500',
           () async {
-        // Arrange
         when(mockHttpClient.get(Uri.parse('$baseUrl$endpoint')))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
-        // Act
         try {
           await apiClient.get(endpoint);
         } catch (e) {
@@ -75,7 +68,6 @@ void main() {
 
       test('debería devolver datos si la llamada al endpoint es exitosa (200)',
           () async {
-        // Arrange
         final responseJson = jsonEncode({"id": 1, "title": "Product"});
 
         when(mockHttpClient.post(
@@ -84,23 +76,19 @@ void main() {
           body: jsonEncode(body),
         )).thenAnswer((_) async => http.Response(responseJson, 200));
 
-        // Act
         final result = await apiClient.post(endpoint, body);
 
-        // Assert
         expect(result, isA<Map<String, dynamic>>());
         expect(result['id'], 21);
       });
 
       test('debería lanzar ServerException si el estado es 500', () async {
-        // Arrange
         when(mockHttpClient.post(
           Uri.parse('$baseUrl$endpoint'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(body),
         )).thenAnswer((_) async => http.Response('Server Error', 500));
 
-        // Act
         try {
           await apiClient.post(endpoint, body);
         } catch (e) {
@@ -111,14 +99,12 @@ void main() {
       test(
           'debería lanzar GeneralException si el estado es diferente a 200 y 500',
           () async {
-        // Arrange
         when(mockHttpClient.post(
           Uri.parse('$baseUrl$endpoint'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(body),
         )).thenAnswer((_) async => http.Response('Not Found', 404));
 
-        // Act
         try {
           await apiClient.post(endpoint, body);
         } catch (e) {

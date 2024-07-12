@@ -4,10 +4,12 @@ import 'application/shopping_cart_application.dart';
 import 'domain/entities/cart_entity.dart';
 import 'domain/entities/product_entity.dart';
 
-// Clase que actúa como interfaz para interactuar con la Fake Store API.
+/// Clase que actúa como interfaz para interactuar con la Fake Store API.
 class DartFakeStoreApiWrapper {
+  /// Instancia de la aplicación del carrito de compras.
   late final ShoppingCartApplication _shoppingCartApp;
 
+  /// Constructor de la clase que permite inyectar una instancia de [ShoppingCartApplication].
   DartFakeStoreApiWrapper([ShoppingCartApplication? shoppingCartApp]) {
     if (shoppingCartApp == null) {
       _initializeShoppingCartApp();
@@ -16,6 +18,7 @@ class DartFakeStoreApiWrapper {
     }
   }
 
+  /// Inicializa la aplicación del carrito de compras.
   Future<void> _initializeShoppingCartApp() async {
     dependency_injection.Container.instance.init();
     _shoppingCartApp = ShoppingCartApplication(
@@ -23,6 +26,7 @@ class DartFakeStoreApiWrapper {
         dependency_injection.Container.instance.userUseCase);
   }
 
+  /// Método para obtener la lista de productos.
   Future<List<ProductEntity>> runFetchProducts() async {
     final result = await _shoppingCartApp.fetchProducts();
     return result.fold(
@@ -39,9 +43,9 @@ class DartFakeStoreApiWrapper {
     );
   }
 
+  /// Método para obtener un solo producto por su ID.
   Future<ProductEntity> runFetchSingleProduct(int productId) async {
     final result = await _shoppingCartApp.fetchSingleProduct(productId);
-
     return result.fold(
       (failure) {
         throw Exception('Error al obtener el producto: ${failure.message}');
@@ -54,9 +58,9 @@ class DartFakeStoreApiWrapper {
     );
   }
 
+  /// Método para enviar un producto al carrito.
   Future<CartEntity> runSendProductToCart(CartEntity cart) async {
     final result = await _shoppingCartApp.sendProductToCart(cart);
-
     return result.fold(
       (failure) {
         throw Exception(
@@ -70,6 +74,7 @@ class DartFakeStoreApiWrapper {
     );
   }
 
+  /// Método para registrar un nuevo usuario.
   Future<IdEntity> runSendRegister(UserEntity userData) async {
     final result = await _shoppingCartApp.sendRegister(userData);
     return result.fold(
@@ -84,6 +89,7 @@ class DartFakeStoreApiWrapper {
     );
   }
 
+  /// Método para iniciar sesión de un usuario.
   Future<TokenEntity> runSendSignIn(UserEntity userData) async {
     final result = await _shoppingCartApp.sendSignIn(userData);
     return result.fold(
@@ -98,6 +104,7 @@ class DartFakeStoreApiWrapper {
     );
   }
 
+  /// Método para obtener la información de un usuario por su ID.
   Future<UserEntity> runFetchInfo(String idUser) async {
     final result = await _shoppingCartApp.fetchInfo(idUser);
     return result.fold(
@@ -113,9 +120,9 @@ class DartFakeStoreApiWrapper {
     );
   }
 
+  /// Método para obtener la lista de categorías.
   Future<List<String>> runFetchCategories() async {
     final result = await _shoppingCartApp.fetchCategories();
-
     return result.fold(
       (failure) {
         throw Exception('Error al obtener las categorias: ${failure.message}');
@@ -128,6 +135,7 @@ class DartFakeStoreApiWrapper {
     );
   }
 
+  /// Método auxiliar para imprimir los detalles de un producto.
   static void _printProductDetails(ProductEntity product) {
     print('======= Detalle del producto ======');
     print('ID: ${product.id}');
@@ -139,6 +147,7 @@ class DartFakeStoreApiWrapper {
     print('Imagen: ${product.image}\n');
   }
 
+  /// Método auxiliar para imprimir los detalles de un carrito.
   static void _printCartDetails(CartEntity cart) {
     print('======= Detalles del carrito ======');
     print('ID: ${cart.id}');
@@ -151,6 +160,7 @@ class DartFakeStoreApiWrapper {
     }
   }
 
+  /// Método auxiliar para imprimir los detalles de un usuario.
   static void _printUserDetails(UserEntity user) {
     print('======= Detalles del usuario ======');
     print('Nombre: ${user.name}');
@@ -164,6 +174,7 @@ class DartFakeStoreApiWrapper {
     print('Longitud: ${user.address?.geolocation.long ?? ''}');
   }
 
+  /// Método auxiliar para imprimir las categorías.
   static void _printCategories(List<String> object) {
     print('======= Detalle del producto ======');
     for (var category in object) {

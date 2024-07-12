@@ -9,25 +9,38 @@ import 'domain/use_cases/users.dart';
 import 'infrastructure/datasources/remote_data_source.dart';
 import 'infrastructure/repositories/repositories.dart';
 
+/// Clase Container
+///
+/// Gestiona la inyección de dependencias para la aplicación.
+/// Implementa el patrón de diseño Singleton.
 class Container {
+  /// La única instancia de Container
   static final Container _instance = Container._internal();
 
   factoryContainer() {
     return _instance;
   }
 
+  /// Constructor privado para implementar el patrón Singleton.
   Container._internal();
 
   static Container get instance => _instance;
 
+  /// Fuente de datos remota para obtener datos de la API.
   late RemoteDataSource _remoteDataSource;
+
+  /// Repositorios.
   late ProductsRepository _productsRepository;
   late CartRepository _cartRepository;
   late UserRepository _userRepository;
 
+  /// Caso de uso para gestionar productos.
   late Products _productUseCase;
+
+  /// Caso de uso para gestionar usuarios.
   late Users _userUseCase;
 
+  /// Inicializa las dependencias de la aplicación.
   void init() {
     final apiClient = ApiClient(http.Client());
 

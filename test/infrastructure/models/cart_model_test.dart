@@ -29,10 +29,8 @@ void main() {
 
     group('fromJson', () {
       test('debería crear una instancia válida desde JSON', () {
-        // Act
         final result = CartModel.fromJson(cartJson);
 
-        // Assert
         expect(result, isA<CartModel>());
         expect(result.id, null);
         expect(result.userId, 1);
@@ -46,10 +44,8 @@ void main() {
 
     group('toJson', () {
       test('debería convertir una instancia a JSON correctamente', () {
-        // Act
         final result = cartModel.toJson();
 
-        // Assert
         expect(result, isA<Map<String, dynamic>>());
         expect(result['userId'], 1);
         expect(result['date'], '2023-01-01T00:00:00.000Z');
@@ -73,10 +69,8 @@ void main() {
 
     group('fromJson', () {
       test('debería crear una instancia válida desde JSON', () {
-        // Act
         final result = ProductQuantityModel.fromJson(productJson);
 
-        // Assert
         expect(result, isA<ProductQuantityModel>());
         expect(result.productId, 1);
         expect(result.quantity, 2);
@@ -85,10 +79,8 @@ void main() {
 
     group('toJson', () {
       test('debería convertir una instancia a JSON correctamente', () {
-        // Act
         final result = productModel.toJson();
 
-        // Assert
         expect(result, isA<Map<String, dynamic>>());
         expect(result['productId'], 1);
         expect(result['quantity'], 2);

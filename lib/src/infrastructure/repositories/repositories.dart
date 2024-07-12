@@ -2,7 +2,6 @@
 // Utiliza un `RemoteDataSource` para realizar operaciones en la capa de data source.
 
 import 'package:dartz/dartz.dart';
-
 import '../../../dart_fake_store_api_wrapper.dart';
 import '../../core/errors/exceptions.dart';
 import '../../core/errors/failures.dart';
@@ -11,10 +10,15 @@ import '../../domain/repositories/product_repository.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../datasources/remote_data_source.dart';
 
+/// La clase `Repositories` implementa las interfaces `CartRepository`, `ProductsRepository` y `UserRepository`.
+///
+/// Utiliza un `RemoteDataSource` para realizar operaciones en la capa de data source.
 class Repositories
     implements CartRepository, ProductsRepository, UserRepository {
+  /// Fuente de datos remota utilizada para interactuar con la API.
   final RemoteDataSource remoteDataSource;
 
+  /// Constructor que recibe una instancia de `RemoteDataSource`.
   Repositories(this.remoteDataSource);
 
   @override
